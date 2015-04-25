@@ -38,7 +38,6 @@ class dbconfig {
       if(empty($query) && !isset($query)) {
         throw new exception("Query string is not set.");
       }
-      $link = self::connect();
       $result = mysqli_query(self::$con, $query);
       self::close();
      return $result;

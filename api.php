@@ -3,11 +3,11 @@
 * Author: Rohit Kumar
 * Website: iamrohit.in
 * Version: 0.0.1
-* Date: 14-04-2015
-* App Name: Email Validator
-* Description: Simple email id validator to check email id is valid of fake.
+* Date: 25-04-2015
+* App Name: Php+ajax country state city dropdown
+* Description: A simple opps based php and ajax country state city dropdown list
 */
-//error_reporting(0);
+error_reporting(0);
 ob_start();
 header('Content-Type: application/json');
 include_once("classes/location.php");
@@ -35,11 +35,12 @@ try {
   	 if(!isset($_GET['stateId']) || empty($_GET['stateId'])) {
   	 	throw new exception("State Id is not set.");
   	 }
+     $stateId = $_GET['stateId'];
   	 $data = $loc->getCities($stateId);
   }
 
 } catch (Exception $e) {
-   $data = array('status'=>'error', 'tp'=>0, 'msg'=>$e->getMessage);
+   $data = array('status'=>'error', 'tp'=>0, 'msg'=>$e->getMessage());
 } finally {
   echo json_encode($data);
 }

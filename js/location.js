@@ -26,7 +26,7 @@
         }
 
 function locationInfo() {
-    var rootUrl = "http://localhost/example/api.php";
+    var rootUrl = "http://lab.iamrohit.in/php_ajax_country_state_city_dropdown/api.php";
     var call = new ajaxCall();
     this.getCities = function(id) {
         $(".cities option:gt(0)").remove();
