@@ -7,8 +7,9 @@
 * App Name: Php+ajax country state city dropdown
 * Description: A simple opps based php and ajax country state city dropdown list
 */
-error_reporting(0);
+//error_reporting(0);
 ob_start();
+header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
 include_once("classes/location.php");
 

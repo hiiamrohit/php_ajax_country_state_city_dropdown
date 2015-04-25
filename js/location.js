@@ -97,4 +97,27 @@ function locationInfo() {
 
 }
 
+$(function() {
+var loc = new locationInfo();
+loc.getCountries();
+ $(".countries").on("change", function(ev) {
+        var countryId = $(this).val()
+        if(countryId != ''){
+        loc.getStates(countryId);
+        }
+        else{
+            $(".states option:gt(0)").remove();
+        }
+    });
+ $(".states").on("change", function(ev) {
+        var stateId = $(this).val()
+        if(stateId != ''){
+        loc.getCities(stateId);
+        }
+        else{
+            $(".cities option:gt(0)").remove();
+        }
+    });
+});
+
 
