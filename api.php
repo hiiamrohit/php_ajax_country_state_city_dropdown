@@ -5,7 +5,7 @@
 * Version: 0.0.1
 * Date: 25-04-2015
 * App Name: Php+ajax country state city dropdown
-* Description: A simple opps based php and ajax country state city dropdown list
+* Description: A simple oops based php and ajax country state city dropdown list
 */
 //error_reporting(0);
 ob_start();
