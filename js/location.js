@@ -4,12 +4,12 @@
           type = type||'json';
           var successRes = function(data) {
               success(data);
-          }
+          };
 
           var errorRes = function(e) {
               console.log(e);
               alert("Error found \nError Code: "+e.status+" \nError Message: "+e.statusText);
-          }
+          };
             $.ajax({
                 url: url,
                 type: method,
@@ -100,7 +100,7 @@ $(function() {
 var loc = new locationInfo();
 loc.getCountries();
  $(".countries").on("change", function(ev) {
-        var countryId = $(this).val()
+        var countryId = $(this).val();
         if(countryId != ''){
         loc.getStates(countryId);
         }
@@ -109,7 +109,7 @@ loc.getCountries();
         }
     });
  $(".states").on("change", function(ev) {
-        var stateId = $(this).val()
+        var stateId = $(this).val();
         if(stateId != ''){
         loc.getCities(stateId);
         }
