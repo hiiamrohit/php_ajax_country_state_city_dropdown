@@ -8,8 +8,6 @@
 
           var errorRes = function(e) {
               console.log(e);
-              //alert("Error found \nError Code: "+e.status+" \nError Message: "+e.statusText);
-              //$('#loader').modal('hide');
           }
             $.ajax({
                 url: url,
