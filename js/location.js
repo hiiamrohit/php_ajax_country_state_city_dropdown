@@ -4,12 +4,13 @@
           type = type||'json';
           var successRes = function(data) {
               success(data);
-          };
+          }
 
           var errorRes = function(e) {
               console.log(e);
-              alert("Error found \nError Code: "+e.status+" \nError Message: "+e.statusText);
-          };
+              //alert("Error found \nError Code: "+e.status+" \nError Message: "+e.statusText);
+              //$('#loader').modal('hide');
+          }
             $.ajax({
                 url: url,
                 type: method,
@@ -25,7 +26,7 @@
         }
 
 function locationInfo() {
-    var rootUrl = "http://lab.iamrohit.in/php_ajax_country_state_city_dropdown/api.php";
+   var rootUrl = "http://iamrohit.in/lab/php_ajax_country_state_city_dropdown/api.php";
     var call = new ajaxCall();
     this.getCities = function(id) {
         $(".cities option:gt(0)").remove();
@@ -38,7 +39,8 @@ function locationInfo() {
             if(data.tp == 1){
                 $.each(data['result'], function(key, val) {
                     var option = $('<option />');
-                    option.attr('value', key).text(val);
+                    option.attr('value', val).text(val);
+                     option.attr('cityid', key);
                     $('.cities').append(option);
                 });
                 $(".cities").prop("disabled",false);
@@ -61,7 +63,8 @@ function locationInfo() {
             if(data.tp == 1){
                 $.each(data['result'], function(key, val) {
                     var option = $('<option />');
-                    option.attr('value', key).text(val);
+                        option.attr('value', val).text(val);
+                        option.attr('stateid', key);
                     $('.states').append(option);
                 });
                 $(".states").prop("disabled",false);
@@ -83,7 +86,8 @@ function locationInfo() {
             if(data.tp == 1){
                 $.each(data['result'], function(key, val) {
                     var option = $('<option />');
-                    option.attr('value', key).text(val);
+                    option.attr('value', val).text(val);
+                     option.attr('countryid', key);
                     $('.countries').append(option);
                 });
                 $(".countries").prop("disabled",false);
@@ -100,7 +104,7 @@ $(function() {
 var loc = new locationInfo();
 loc.getCountries();
  $(".countries").on("change", function(ev) {
-        var countryId = $(this).val();
+        var countryId = $("option:selected", this).attr('countryid');
         if(countryId != ''){
         loc.getStates(countryId);
         }
@@ -109,7 +113,7 @@ loc.getCountries();
         }
     });
  $(".states").on("change", function(ev) {
-        var stateId = $(this).val();
+        var stateId = $("option:selected", this).attr('stateid');
         if(stateId != ''){
         loc.getCities(stateId);
         }
@@ -118,5 +122,4 @@ loc.getCountries();
         }
     });
 });
-
 
