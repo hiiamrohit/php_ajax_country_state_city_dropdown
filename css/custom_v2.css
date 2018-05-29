@@ -14,7 +14,7 @@ body {
     justify-content: center;
 }
 .wrapper {
-    background-color: #27ae60;
+    background-color: rgba(30, 30, 30, 0.9);
     border-radius: 2%;
     width: 30%;
     height: 40%;
