@@ -1,31 +1,31 @@
 <?php
 class dbconfig {
-  // database hostname 
+  // database hostname
   protected static $host = "localhost";
   // database username
   protected static $username = "root";
   // database password
-  protected static $password = "root";
+  protected static $password = "";
   //database name
   protected static $dbname = "crm";
 
   static $con;
 
   function __construct() {
-    self::$con = self::connect(); 
+    self::$con = self::connect();
   }
-  
+
   // open connection
   protected static function connect() {
      try {
-       $link = mysqli_connect(self::$host, self::$username, self::$password, self::$dbname); 
+       $link = mysqli_connect(self::$host, self::$username, self::$password, self::$dbname);
         if(!$link) {
           throw new exception(mysqli_error($link));
         }
         return $link;
      } catch (Exception $e) {
        echo "Error: ".$e->getMessage();
-     } 
+     }
   }
 
  // close connection
@@ -44,7 +44,7 @@ class dbconfig {
     } catch (Exception $e) {
       echo "Error: ".$e->getMessage();
     }
-     
-  } 
+
+  }
 
 }
