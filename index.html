@@ -5,10 +5,12 @@
         <meta charset="utf-8">
         <meta name="Keywords" content="PHP Ajax Country State City Dropdown">
         <meta name="Description" content="PHP Ajax Country State City Dropdown">
-        <link href="./css/custom.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="./bower_components/select2/dist/css/select2.min.css">
+        <link rel="stylesheet" href="./stylesheet/css/master.css">
     </head>
     <body>
-        <form action="#" role="form" class="form-horizontal" id="location" method="post" accept-charset="utf-8">
+        <form action="#">
             <select class="countries" id="countryId">
                 <option value="">Select Country</option>
             </select>
@@ -20,6 +22,8 @@
             </select>
         </form>
 
+        <script src="./bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
+        <script src="./bower_components/select2/dist/js/select2.min.js" charset="utf-8"></script>
         <script src="js/location.js"></script>
     </body>
 </html>
