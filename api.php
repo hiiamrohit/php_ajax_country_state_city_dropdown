@@ -1,48 +1,49 @@
 <?php
-/*
-* Author: Rohit Kumar
-* Website: iamrohit.in
-* Version: 0.0.1
-* Date: 25-04-2015
-* App Name: Php+ajax country state city dropdown
-* Description: A simple oops based php and ajax country state city dropdown list
-*/
 error_reporting(0);
 ob_start();
-header("Access-Control-Allow-Origin: *");
-header('Content-Type: application/json');
-include_once("classes/location.php");
 
-$loc = new location();
+header("Access-Control-Allow-Origin: *");
+
+require_once 'classes/class.Location.php';
+
+$locationObject = new Location();
 
 try {
-    if(!isset($_GET['type']) || empty($_GET['type'])) {
+
+    if ( !isset($_POST['type']) || empty($_POST['type']) ) {
         throw new exception("Type is not set.");
     }
-    $type = $_GET['type'];
-    if($type=='getCountries') {
-        $data = $loc->getCountries();
+
+    $type = $_POST['type'];
+
+    if( $type == 'getCountries' ) {
+        $data = $locationObject->getCountries();
     }
 
-    if($type=='getStates') {
-        if(!isset($_GET['countryId']) || empty($_GET['countryId'])) {
+    if ( $type == 'getStates' ) {
+        if ( !isset($_POST['countryId']) || empty($_POST['countryId'])) {
             throw new exception("Country Id is not set.");
         }
-        $countryId = $_GET['countryId'];
-        $data = $loc->getStates($countryId);
+        $data = $locationObject->getStates( $_POST['countryId'] );
     }
 
-    if($type=='getCities') {
-        if(!isset($_GET['stateId']) || empty($_GET['stateId'])) {
+    if ( $type == 'getCities' ) {
+        if ( !isset($_POST['stateId']) || empty($_POST['stateId']) ) {
             throw new exception("State Id is not set.");
         }
-        $stateId = $_GET['stateId'];
-        $data = $loc->getCities($stateId);
+        $data = $locationObject->getCities( $_POST['stateId'] );
     }
 
-} catch (Exception $e) {
-    $data = array('status'=>'error', 'tp'=>0, 'msg'=>$e->getMessage());
-} finally {
+}
+catch (Exception $e) {
+    $data = array(
+        'status' => 'error',
+        'tp'     => 0,
+        'msg'    => $e->getMessage()
+    );
+}
+finally {
+    header('Content-Type: application/json');
     echo json_encode($data);
 }
 

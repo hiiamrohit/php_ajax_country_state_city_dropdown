@@ -1,5 +1,5 @@
 stylesheet/scss/.sass-cache
-bower_components
+node_modules
 stylesheet/css
-bower.json
+package-lock.json
 dbfiles

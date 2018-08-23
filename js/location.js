@@ -1,122 +1,137 @@
+"use strict"
 
-    function ajaxCall() {
-        this.send = function(data, url, method, success, type) {
-          type = type||'json';
-          var successRes = function(data) {
-              success(data);
-          };
+function AjaxRequest() {
 
-          var errorRes = function(e) {
-              console.log(e);
-              alert("Error found \nError Code: "+e.status+" \nError Message: "+e.statusText);
-          };
-            $.ajax({
-                url: url,
-                type: method,
-                data: data,
-                success: successRes,
-                error: errorRes,
-                dataType: type,
-                timeout: 60000
-            });
+    this.send = function(data, url, method, success, type) {
 
-          }
+        type = type || 'json';
 
-        }
+        let successRes = function(data) {
+            success(data);
+        };
 
-function locationInfo() {
-    var rootUrl = "api.php";
-    var call = new ajaxCall();
+        let errorRes = function(e) {
+            console.log(e);
+            alert("Error found \nError Code: " + e.status + " \nError Message: " + e.statusText);
+        };
+        $.ajax({
+            url: url,
+            type: method,
+            data: data,
+            success: successRes,
+            error: errorRes,
+            dataType: type,
+            timeout: 60000
+        });
+    }
+}
+
+function LocationInfo() {
+
+    const __API_URL__ = "api.php",
+          ajxReqst    = new AjaxRequest();
+
     this.getCities = function(id) {
-        $(".cities option:gt(0)").remove();
-        var url = rootUrl+'?type=getCities&stateId=' + id;
-        var method = "post";
-        var data = {};
-        $('.cities').find("option:eq(0)").html("Please wait..");
-        call.send(data, url, method, function(data) {
-            $('.cities').find("option:eq(0)").html("Select City");
-            if(data.tp == 1){
+
+        /**
+         * Removing existing cities except index[0]
+        */
+
+        $("#cities option:gt(0)").remove();
+
+        ajxReqst.send({ type: 'getCities', stateId: id }, __API_URL__, 'post', function(data) {
+
+            if ( data.tp ) {
                 $.each(data['result'], function(key, val) {
                     var option = $('<option />');
                     option.attr('value', key).text(val);
-                    $('.cities').append(option);
+                    $('#cities').append(option);
                 });
-                $(".cities").prop("disabled",false);
             }
-            else{
-                 alert(data.msg);
+            else {
+                alert(data.msg);
             }
         });
     };
 
     this.getStates = function(id) {
-        $(".states option:gt(0)").remove(); 
-        $(".cities option:gt(0)").remove(); 
-        var url = rootUrl+'?type=getStates&countryId=' + id;
-        var method = "post";
-        var data = {};
-        $('.states').find("option:eq(0)").html("Please wait..");
-        call.send(data, url, method, function(data) {
-            $('.states').find("option:eq(0)").html("Select State");
-            if(data.tp == 1){
+
+        /**
+         * Removing existing cities and states except index[0]
+        */
+
+        $("#states option:gt(0)").remove();
+        $("#cities option:gt(0)").remove();
+
+        ajxReqst.send({ type: 'getStates', countryId: id }, __API_URL__, 'post', function(data) {
+
+            if ( data.tp ) {
+
+                $("#states option").remove();
+
                 $.each(data['result'], function(key, val) {
-                    var option = $('<option />');
+                    let option = $('<option />');
                     option.attr('value', key).text(val);
-                    $('.states').append(option);
+                    $('#states').append(option);
                 });
-                $(".states").prop("disabled",false);
             }
-            else{
+            else {
                 alert(data.msg);
             }
-        }); 
+        });
     };
 
     this.getCountries = function() {
-        var url = rootUrl+'?type=getCountries';
-        var method = "post";
-        var data = {};
-        $('.countries').find("option:eq(0)").html("Please wait..");
-        call.send(data, url, method, function(data) {
-            $('.countries').find("option:eq(0)").html("Select Country");
-            console.log(data);
-            if(data.tp == 1){
+
+        /**
+         * Removing existing states and cities except index[0]
+        */
+
+        $("#state option:gt(0)").remove();
+        $("#cities option:gt(0)").remove();
+
+        ajxReqst.send({ type: 'getCountries' }, __API_URL__, 'post', function(data) {
+
+            if ( data.tp ) {
+
                 $.each(data['result'], function(key, val) {
-                    var option = $('<option />');
+                    let option = $('<option />');
                     option.attr('value', key).text(val);
-                    $('.countries').append(option);
+                    $('#countries').append(option);
                 });
-                $(".countries").prop("disabled",false);
             }
-            else{
+            else {
                 alert(data.msg);
             }
-        }); 
+        });
     };
 
 }
 
 $(function() {
-var loc = new locationInfo();
-loc.getCountries();
- $(".countries").on("change", function(ev) {
-        var countryId = $(this).val();
-        if(countryId != ''){
-        loc.getStates(countryId);
-        }
-        else{
-            $(".states option:gt(0)").remove();
+
+    $('#countries').append('<option value="">Choose a country</option>');
+    $('#states').append('<option value="">Choose a state</option>');
+    $('#cities').append('<option value="">Choose a City</option>');
+
+    var loc = new LocationInfo();
+    loc.getCountries();
+
+    $("#countries").on("change", function() {
+
+        let countryId = $(this).val();
+
+        if ( countryId != '' ) {
+            loc.getStates(countryId);
         }
     });
- $(".states").on("change", function(ev) {
+
+    $("#states").on("change", function() {
+
         var stateId = $(this).val();
-        if(stateId != ''){
-        loc.getCities(stateId);
-        }
-        else{
-            $(".cities option:gt(0)").remove();
+
+        if ( stateId != '' ) {
+            loc.getCities(stateId);
         }
     });
 });
-
-

@@ -1,0 +1,24 @@
+{
+  "name": "php_ajax_country_state_city_dropdown",
+  "version": "1.0.0",
+  "description": "A simple oops based php and ajax country state city dropdown list",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bijaydas/php_ajax_country_state_city_dropdown.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bijaydas/php_ajax_country_state_city_dropdown/issues"
+  },
+  "homepage": "https://github.com/bijaydas/php_ajax_country_state_city_dropdown#readme",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "materialize-css": "^1.0.0-rc.2"
+  }
+}
