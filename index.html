@@ -1,21 +1,40 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <title>php ajax country state city dropdown</title>
+        <title>PHP Ajax Country State City</title>
         <meta charset="utf-8">
         <meta name="Keywords" content="PHP Ajax Country State City Dropdown">
         <meta name="Description" content="PHP Ajax Country State City Dropdown">
-        <!-- <link rel="stylesheet" href="./node_modules/materialize-css/dist/css/materialize.min.css"> -->
+
+        <link type="text/css" rel="stylesheet" href="./node_modules/select2/dist/css/select2.min.css">
+        <link type="text/css" rel="stylesheet" href="./stylesheet/css/master.css">
     </head>
     <body>
         <div class="container">
-            <select id="countries"></select>
-            <select id="states"></select>
-            <select id="cities"></select>
+            <section class="card-panel">
+                <h5>CSC Dropdown</h5>
+            </section>
+
+            <section class="dropdowns">
+                <select id="countries">
+                    <option value="">Choose a country</option>
+                </select>
+                <select id="states">
+                    <option value="">Choose a state</option>
+                </select>
+                <select id="cities">
+                    <option value="">Choose a City</option>
+                </select>
+            </section>
+
+            <section class="images-gallery">
+
+            </section>
         </div>
 
+
         <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-        <!-- <script src="./node_modules/materialize-css/dist/js/materialize.min.js"></script> -->
+        <script src="./node_modules/select2/dist/js/select2.min.js" charset="utf-8"></script>
         <script src="js/location.js"></script>
     </body>
 </html>

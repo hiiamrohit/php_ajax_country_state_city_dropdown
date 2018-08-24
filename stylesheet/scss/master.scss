@@ -1,0 +1,22 @@
+@import "reset";
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.container {
+    section.card-panel {
+        background-color: #5f27cd;
+        color: #fff;
+        text-align: center;
+        font-size: 1.3rem;
+        font-family: 'Roboto';
+        padding: 1rem 0;
+
+        box-shadow:
+            10px 10px 10px rgba(34, 47, 62, 0.4),
+            5px 5px 5px rgba(34, 47, 62, 0.2);
+    }
+
+    section.dropdowns {
+        text-align: center;
+        margin-top: 1rem;
+    }
+}

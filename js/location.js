@@ -14,6 +14,7 @@ function AjaxRequest() {
             console.log(e);
             alert("Error found \nError Code: " + e.status + " \nError Message: " + e.statusText);
         };
+
         $.ajax({
             url: url,
             type: method,
@@ -28,8 +29,13 @@ function AjaxRequest() {
 
 function LocationInfo() {
 
-    const __API_URL__ = "api.php",
-          ajxReqst    = new AjaxRequest();
+    const __API_URL__          = "api.php",
+
+          /**
+           * Set your Pixabay API key here
+          */
+          __PIXABAY_API_KEY__  = '',
+          ajxReqst             = new AjaxRequest();
 
     this.getCities = function(id) {
 
@@ -106,29 +112,83 @@ function LocationInfo() {
         });
     };
 
+    /**
+     Pixabay fetch images process
+    */
+    this.getLocationImages = function( searchQuery ) {
+
+        let __PIXABAY_API_URL__  = 'https://pixabay.com/api/?'       ;
+            __PIXABAY_API_URL__ += 'image_type=photo&pretty=true&'   ;
+            __PIXABAY_API_URL__ += 'key=' + __PIXABAY_API_KEY__ + '&';
+            __PIXABAY_API_URL__ += 'q='   + searchQuery;
+
+        ajxReqst.send({}, __PIXABAY_API_URL__, 'get', function( apiResponseJSON ) {
+
+            /**
+             * If API founds query images
+            */
+            if ( apiResponseJSON.total > 0 ) {
+
+                /**
+                 * Clearing up the images container
+                */
+                $('.images-gallery').html('');
+
+                apiResponseJSON.hits.map(key => {
+                    let img_src_preview = key.previewURL,
+                        $img            = $('<img/>');
+
+                    $img.attr( 'src', img_src_preview );
+                    $('.images-gallery').append( $img );
+                });
+            }
+            else {
+                alert( 'No images found!' );
+            }
+        });
+    }
+
 }
 
-$(function() {
+$(document).ready(function() {
 
-    $('#countries').append('<option value="">Choose a country</option>');
-    $('#states').append('<option value="">Choose a state</option>');
-    $('#cities').append('<option value="">Choose a City</option>');
+    let loc = new LocationInfo();
 
-    var loc = new LocationInfo();
+    /**
+     * Feching country names by default
+    */
     loc.getCountries();
 
-    $("#countries").on("change", function() {
+    /**
+    * Make it false if you don't have an API key, else set your API key
+    * at line no 37
+    */
+    const IMAGES_PREVIEW = true;
 
-        let countryId = $(this).val();
+    /**
+    * Select2 initialized
+    */
+
+    $('select').select2({ width: '400px' });
+
+    $('#countries').on('change', function() {
+
+        let countryId   = $(this).val(),
+        countryName = $('#countries option:selected').text();
 
         if ( countryId != '' ) {
+
             loc.getStates(countryId);
+
+            if ( IMAGES_PREVIEW ) {
+                loc.getLocationImages( countryName );
+            }
         }
     });
 
-    $("#states").on("change", function() {
+    $('#states').on('change', function() {
 
-        var stateId = $(this).val();
+        let stateId = $(this).val();
 
         if ( stateId != '' ) {
             loc.getCities(stateId);
