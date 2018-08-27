@@ -134,13 +134,49 @@ function LocationInfo() {
                 */
                 $('.images-gallery').html('');
 
-                apiResponseJSON.hits.map(key => {
-                    let img_src_preview = key.previewURL,
-                        $img            = $('<img/>');
+                let seatchResultTemplate = `
+                    <h4>${apiResponseJSON.total} images found from</h4>
+                    <a href="https://pixabay.com/en/photos/?q=${searchQuery}" target="_blank">
+                        <img src="./images/pixabay_logo_square.svg" alt="Pixabay Logo">
+                    </a>
+                `;
 
-                    $img.attr( 'src', img_src_preview );
-                    $('.images-gallery').append( $img );
-                });
+                $('.images-info').html( seatchResultTemplate );
+
+                /**
+                 * Need to use for loop to preview only 20 images
+                */
+
+                let imgPreviewLimit = (apiResponseJSON.total > 20 ? 20 : apiResponseJSON.total);
+
+                for (let i = 0; i < imgPreviewLimit; i++) {
+
+                    let largeImageURL = apiResponseJSON.hits[i].largeImageURL,
+                        previewURL    = apiResponseJSON.hits[i].previewURL;
+
+                    /**
+                     * Creating <a>
+                    */
+                    let $a = $('<a>');
+                    $a.attr('href', largeImageURL);
+                    $a.attr('target', '__blank');
+
+                    /**
+                     * Creating <img/>
+                    */
+                    let $img = $('<img/>');
+                    $img.attr('src', previewURL);
+
+                    /**
+                     * Now adding the img to a
+                    */
+                    $a.html( $img );
+
+                    /**
+                     * Finally appending the <a> t the images-gallery
+                    */
+                    $('.images-gallery').append($a);
+                }
             }
             else {
                 alert( 'No images found!' );
@@ -163,7 +199,7 @@ $(document).ready(function() {
     * Make it false if you don't have an API key, else set your API key
     * at line no 37
     */
-    const IMAGES_PREVIEW = true;
+    const IMAGES_PREVIEW = false;
 
     /**
     * Select2 initialized
@@ -174,7 +210,7 @@ $(document).ready(function() {
     $('#countries').on('change', function() {
 
         let countryId   = $(this).val(),
-        countryName = $('#countries option:selected').text();
+            countryName = $('#countries option:selected').text();
 
         if ( countryId != '' ) {
 
