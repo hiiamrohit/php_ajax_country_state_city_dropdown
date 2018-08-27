@@ -16,5 +16,3 @@ $ cd php_ajax_country_state_city_dropdown
 $ npm install
 ```
 Note: If you have an Pixabay API key then put it in js/location.js line no 37 and make IMAGES_PREVIEW = true in line no 202.
-
-## Preview
