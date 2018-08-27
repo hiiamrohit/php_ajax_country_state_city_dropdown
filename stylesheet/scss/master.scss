@@ -1,0 +1,80 @@
+@import "reset";
+@import url('https://fonts.googleapis.com/css?family=Roboto|Kaushan+Script');
+
+.container {
+    section.card-panel {
+        color: #5f27cd;
+        text-align: center;
+        padding: 1rem 0;
+
+        h5 {
+            transform: rotate(-5deg);
+            font-size: 2rem;
+            font-family: 'Kaushan Script';
+        }
+    }
+
+    section.dropdowns {
+        text-align: center;
+        margin-top: 1rem;
+        font-family: 'Roboto';
+    }
+
+    /**
+    * images-gallery section
+    */
+
+    section.images-gallery-container {
+        width: 89%;
+        margin: 1rem auto;
+
+        div.images-info {
+            display: flex;
+            justify-content: flex-end;
+            h4 {
+                display: flex;
+                align-items: center;
+                font-family: 'Roboto';
+            }
+            h4, a {
+                height: 60px;
+            }
+            img {
+                height: 100%;
+                margin-left: 10px;
+                border-radius: 3px;
+                transition: 0.1s;
+                box-shadow:
+                    1px 2px 5px rgba(52, 73, 94, 0.5),
+                    1px 2px 3px rgba(52, 73, 94, 0.3);
+
+                &:hover {
+                    box-shadow:
+                        2px 3px 5px rgba(52, 73, 94, 0.5),
+                        2px 3px 3px rgba(52, 73, 94, 0.3);
+                }
+            }
+        }
+        div.images-gallery {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 1rem;
+
+            img {
+                height: 100px;
+                opacity: 0.5;
+                transition: 0.4s;
+
+                &:hover {
+                    opacity: 1;
+                    transform: scale(1.2);
+
+                    box-shadow:
+                        0px 0px 0px 20px rgba(52, 73, 94, 0.5),
+                        0px 0px 0px 30px rgba(52, 73, 94, 0.2);
+                }
+            }
+        }
+    }
+}

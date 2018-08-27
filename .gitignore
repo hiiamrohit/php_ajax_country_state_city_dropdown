@@ -1,0 +1,5 @@
+stylesheet/scss/.sass-cache
+node_modules
+stylesheet/css
+package-lock.json
+dbfiles

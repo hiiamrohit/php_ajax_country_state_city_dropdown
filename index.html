@@ -1,43 +1,43 @@
-
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <title>php ajax country state city dropdown</title>
+        <title>PHP Ajax Country State City</title>
         <meta charset="utf-8">
-        <meta name="Keywords" content="php ajax country state city dropdown">
-        <meta name="Description" content="php ajax country state city dropdown">
-        <link href="css/custom.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <meta name="Keywords" content="PHP Ajax Country State City Dropdown">
+        <meta name="Description" content="PHP Ajax Country State City Dropdown">
+
+        <link type="text/css" rel="stylesheet" href="./node_modules/select2/dist/css/select2.min.css">
+        <link type="text/css" rel="stylesheet" href="./stylesheet/css/master.css">
     </head>
     <body>
-        <form action="#" role="form" class="form-horizontal" id="location" method="post" accept-charset="utf-8">
-        <div class="form-group"> 
-    <div class="col-sm-4">
-        <select name="country" class="form-control countries" id="countryId" required="required">
-<option value="">Select Country</option>
-</select>
-    </div>
-</div>
- <div class="form-group"> 
- <div class="col-sm-4">
-        <select name="state" class="form-control states" id="stateId" required="required">
-<option value="">Select State</option>
-</select>
-    </div>
-</div>
- <div class="form-group"> 
- <div class="col-sm-4">
-        <select name="city" class="form-control cities" id="cityId" required="required">
-<option value="">Select City</option>
-</select>
-    </div>
-</div>
-</form>
+        <div class="container">
+            <section class="card-panel">
+                <h5>Country images</h5>
+            </section>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>   
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
-    <script src="js/location.js"></script>   
+            <section class="dropdowns">
+                <select id="countries">
+                    <option value="">Choose a country</option>
+                </select>
+                <select id="states">
+                    <option value="">Choose a state</option>
+                </select>
+                <select id="cities">
+                    <option value="">Choose a City</option>
+                </select>
+            </section>
 
-</body>
+            <section class="images-gallery-container">
+                <div class="images-info"></div>
+                <div class="images-gallery">
+
+                </div>
+            </section>
+        </div>
+
+
+        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="./node_modules/select2/dist/js/select2.min.js" charset="utf-8"></script>
+        <script src="js/location.js"></script>
+    </body>
 </html>
